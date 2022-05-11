@@ -1,0 +1,135 @@
+@import '../../node_modules/@splidejs/splide/dist/css/splide-core.min.css';
+
+.grid--slider{
+    margin-bottom: 25px;
+    grid-template-columns: 1fr 7fr 1fr;
+}
+
+.slide__list{
+    display:none;
+}
+
+.splide__arrows {
+    display: none;
+  
+}
+  
+.slide {
+    margin-left: auto;
+    margin-right: auto;
+    width: 250px;
+    margin-bottom: 100px;
+}
+
+.splide__img{
+    width: 75%;
+}
+
+.slider__text{
+    grid-column: 2/3;
+}
+
+.splide__sub{
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 16px;
+}
+
+.splide__name{
+    font-weight: 700;
+    font-size: 27px;
+    line-height: 29px;
+    margin-top: 0%;
+}
+
+// Generic Slide
+.splide__slide, .slide__slide {
+    text-align: center;    
+    padding: 0px 15px;
+    padding-top: 35px;
+    border: solid 5px $contrast;
+    width: 100%;
+    transition: transform 400ms;
+    transform: scale(.9);
+    transform-origin: center center;
+
+}
+
+// Active Slide
+.splide__slide.is-active {
+    transform: scale(1);
+
+}
+
+.splide__pagination{
+    padding: 0%;
+    .splide__pagination__page{
+    background: none;
+    width: 25px;
+    height: 10px;
+    border: solid 2px $contrast;
+    margin: 5px;
+
+    &:hover{
+        transition: all 300ms;
+        background-color: $contrast--hover;
+        border: solid 2px $contrast--hover;
+    }
+    }
+
+    .is-active{
+    background-color: $contrast;
+    }
+}
+    
+
+@media(min-width:768px){
+    .grid--slider{
+        grid-template-columns: 1fr 3fr 1fr;
+    }
+
+    .slide__list{
+        display:flex;
+        margin-bottom: 150px;
+    }
+
+    .splide__sub{
+        font-size: 18px;
+    }
+    
+    .splide__name{
+        font-size: 30px;
+    }
+
+    .slider__title{
+        grid-column: 2/3;
+    }
+
+    .slide{
+        display: none;
+    }
+}
+@media(min-width:1150px){
+    .grid--slider{
+        grid-template-columns: 1fr 2fr 1fr;
+    }
+
+    .slide__list{
+        width: 1100px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .splide__sub{
+        font-size: 20px;
+    }
+    
+    .splide__name{
+        font-size: 35px;
+    }
+
+
+    .slide{
+        display: none;
+    }
+}

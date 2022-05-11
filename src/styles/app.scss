@@ -1,0 +1,22 @@
+@import 'utils/variables';
+@import 'components/footer';
+@import 'components/header';
+@import 'components/content';
+@import 'components/slider';
+@import 'components/proto';
+@import 'background';
+@import '../../node_modules/modern-normalize/modern-normalize.css';
+
+body{
+    font-family: nort, sans-serif;
+    background: #F8FFFF;
+    font-weight: 300;
+    font-size: 20px;
+    line-height: 155%;
+
+}
+
+ul{
+    list-style: none;
+    padding: 0%;
+}

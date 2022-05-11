@@ -1,0 +1,47 @@
+.footer{
+    background-color: #d4faFF;
+    padding-top:45px;
+    padding-bottom: 45px;
+}
+
+.footer__list{
+    margin-left: 45px;
+}
+
+.footer__item{
+    margin-bottom: 25px;
+    font-weight: 500;
+    font-size: 30px;    
+
+}
+
+.footer__link{
+    color: black;
+    text-decoration: underline 5px $contrast; 
+
+    &:hover{
+            transition: all .3s;
+            color: $contrast--hover;
+            text-decoration: underline 5px $contrast--hover; 
+        cursor: pointer;
+    }   
+
+    svg{
+        width: 70px;
+    }
+}
+
+.contrast{
+    fill: $contrast;
+}
+
+@media (min-width: 768px) {
+    .footer__list {
+      margin-left: 115px;
+    }
+  
+    .footer__item {
+      margin-bottom: 30px;
+      font-size: 35px;
+    }
+  }
