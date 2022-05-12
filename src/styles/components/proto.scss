@@ -27,72 +27,8 @@
     }
 }
 
-.grid--contact{
-    grid-template-columns: 1fr 1fr 5fr 1fr 1fr;
-}
-
-.contact__title{
-    grid-column: 1/-1;
-}
-
-.contact__text{
-    grid-column: 2/4;
-}
-
-.contact__list{
-    grid-column: 2/4;
-    font-weight: 500;
-    font-size: 25px;
-    grid-column: 3/-1;
-}
-
-.contact__item{
-    margin-bottom: 15px;
-    color: $contrast;
-    
-    &:hover{
-        transition: all .3s;
-        transform: scale(1.1);
-        cursor: pointer;
-        color: $contrast--hover;
-
-        path{
-            fill: $contrast--hover;
-        }
-        
-    }   
-
-    svg{
-        width: 32px;
-    }
-}
 
 @media(min-width:768px){
-    .grid--contact{
-        grid-template-columns: 1fr 1fr 1fr 7fr 4fr ;
-    }
-
-    .contact__text{
-        grid-column: 3/5;
-        font-size: 27px;
-    }
-
-    .contact__title{
-        grid-column: 2/-1;
-        margin-bottom: 25px;
-    }
-
-    .contact__list{
-        grid-column: 4/5;
-    }
-
-    .contact__item{
-        font-size: 30px;
-
-        svg{
-            width: 40px;
-        }
-    }
 
     .grid--proto{
         grid-template-columns: repeat(6, 1fr);
@@ -112,32 +48,7 @@
 
 
 @media(min-width:1150px){
-    .grid--contact{
-        grid-template-columns: 3fr 1fr 1fr 7fr 5fr ;
-    }
-
-    .contact__text{
-        grid-column: 3/5;
-        font-size: 30px;
-    }
-
-    .contact__title{
-        grid-column: 2/-1;
-        margin-bottom: 25px;
-    }
-
-    .contact__list{
-        grid-column: 4/5;
-    }
-
-    .contact__item{
-        font-size: 40px;
-
-        svg{
-            width: 50px;
-        }
-    }
-
+    
     .grid--proto{
         grid-template-columns: 2fr repeat(4, 1fr) 2fr;
     }
