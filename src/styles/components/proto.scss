@@ -1,3 +1,8 @@
+.grid--proto{
+    margin-bottom: 0%;
+    padding-bottom: 100px;
+}
+
 .proto__title{
     grid-column: 2/-1;
 }
@@ -5,7 +10,7 @@
 .proto__text{
     grid-column: 2/-1;
     font-weight: 500;
-    font-size: 25px;
+    font-size: 22px;
     line-height: 155%;
 }
 
@@ -27,6 +32,21 @@
     }
 }
 
+.reseau{
+    background-color: rgb(29, 29, 29);
+    color: white;
+}
+
+.reseau__list{
+    margin: 0%;
+    padding: 20px 0px;
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+    width: 250px;
+    margin-right: auto;
+    margin-left: auto;
+}
 
 @media(min-width:768px){
 
