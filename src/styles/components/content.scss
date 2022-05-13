@@ -14,6 +14,7 @@
 
 .title{
     grid-column: 1/-1;
+    margin-top: 0%;
 }
 
 .title--big{
@@ -33,17 +34,17 @@
 
 .text--main{
     font-weight: 500;
-    font-size: 25px;
+    font-size: 22px;
     line-height: 155%;
-    grid-column: 2/5;
+    grid-column: 1/4;
     margin-left: 10px;
 }
 
 .text--secondary{
-    font-weight: 300;
+    font-weight: 400;
     font-size: 20px;
     line-height: 155%;
-    grid-column: 3/-1;
+    grid-column: 2/5;
     margin-left: 0px;
 }
 
@@ -56,6 +57,30 @@
     font-weight: 400;
     font-size: 22px;
     line-height: 140%;
+}
+
+.step{
+    margin-top: 32px;
+    display: flex;
+    grid-column: 2/-1;
+    font-weight: 800;
+    letter-spacing: 4px;
+    margin-bottom: 5px;
+    
+
+    &:first-child{
+        grid-column: 1/-1;
+    }
+}
+
+.step__img{
+    width: 30px ;
+    object-fit: contain;
+    margin-right: 10px;
+}
+
+.step__text{
+    margin: 0px;
 }
 
 @media(min-width:768px){
