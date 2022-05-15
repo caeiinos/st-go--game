@@ -1,10 +1,56 @@
-.proto__btn{
-    background: url('../assets/images/button.png');
-    border: 0px;
-    background-position: center;
-    background-size: cover;
+.proto__btn {
+    grid-column: 1/-1;
+    font-size: 22px;
+    background-color: $contrast;
     background-repeat: no-repeat;
+    position: relative;
+    width: 200px;
+    height: 100px;
+    margin: 20px auto;
+    line-height: 60px;
+    letter-spacing: 2px;
+    text-decoration: none;
+    text-transform: uppercase;
+    text-align: center;
+    color: #fff;
+    transition: all 0.5s;
+    border: 1px solid $contrast;
+    &:hover {
+      border: 1px solid transparent;
+      background: url('../assets/images/btn--anim1.png');
+      transition-delay: 0.6s;
+      background-size: 200px;
+      animation: back 0.5s steps(5) forwards;
+    }
+  }
+
+.header__btn {  
+grid-column: 1/-1;
+font-size: 22px;
+cursor: pointer;
+background-color: $contrast;
+background-repeat: no-repeat;
+position: relative;
+width: 240px;
+height: 80px;
+margin: 20px auto;
+line-height: 60px;
+letter-spacing: 2px;
+text-decoration: none;
+text-transform: uppercase;
+text-align: center;
+color: #fff;
+transition: all 0.5s;
+border: 1px solid $contrast;
+&:hover {
+    border: 1px solid transparent;
+    background:$contrast url('../assets/images/btn--anim2.png');
+    transition-delay: 0.6s;
+    background-size: 100%;
+    animation: back1 0.6s steps(6) forwards;
 }
+}
+
 
 .header{
     background-image: url(../assets/images/background.jpg);
@@ -16,11 +62,7 @@
     background-image: url('../assets/images/sol.png');
 }
 
-.footer{
-    background: url('../assets/images/waterback.png');
-}
-
-.fouille{
+.fouille, .footer{
     background-image: url('../assets/images/dirtback.png');
 }
 
@@ -38,4 +80,44 @@
 
 .coldtodirt{
     background-image: url('../assets/images/coldtodirt.png');
+}
+
+@media(min-width:768px){
+    .proto__btn{
+        width: 240px;
+        height: 120px;
+        font-size: 30px;
+        &:hover {
+            background-size: 240px;
+        }
+    }
+
+    .header__btn{
+        width: 270px;
+        height: 90px;
+        font-size: 30px;
+        &:hover {
+            background-size: 270px;
+        }
+    }
+}
+
+@media(min-width:1150px){
+    .proto__btn{
+        width: 320px;
+        height: 160px;
+        font-size: 35px;
+        &:hover {
+            background-size: 320px;
+        }
+    }
+
+    .header__btn{
+        width: 300px;
+        height: 100px;
+        font-size: 30px;
+        &:hover {
+            background-size: 300px;
+        }
+    }
 }

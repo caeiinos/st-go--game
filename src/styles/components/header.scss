@@ -39,13 +39,20 @@
     left: 50%;
     transform: translate(-50%);
     min-width: 190px;
+
+    &:hover{
+        .contrast{
+            fill: $contrast--hover;
+        }
+    }
 }
 
 .header__text{
     margin: 0%;
-    font-size: 35px;
-    font-weight: 900;
+    font-size: 30px;
+    font-weight: 700;
     margin-bottom: 5px;
+    margin-top: 10px;
 }
 
 @media(min-width:768px){

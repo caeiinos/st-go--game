@@ -70,18 +70,18 @@
     background: none;
     width: 25px;
     height: 10px;
-    border: solid 2px $sol--hover;
+    border: solid 2px $color;
     margin: 5px;
 
     &:hover{
         transition: all 300ms;
-        background-color: $sol--hover;
-        border: solid 2px $sol--hover;
+        background-color: $color--hover;
+        border: solid 2px $color--hover;
     }
     }
 
     .is-active{
-    background-color: $sol--hover;
+    background-color: $color--hover;
     }
 }
     
@@ -93,7 +93,7 @@
 
     .slide__list{
         display:flex;
-        margin-bottom: 150px;
+        margin-bottom: 0%;
     }
 
     .splide__sub{

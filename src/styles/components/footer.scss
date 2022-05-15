@@ -1,7 +1,7 @@
 .footer{
-    background-color: #d4faFF;
     padding-top:45px;
     padding-bottom: 45px;
+    color: white;
 }
 
 .footer__list{
@@ -16,14 +16,19 @@
 }
 
 .footer__link{
-    color: black;
-    text-decoration: underline 5px $contrast; 
+    color: white;
+    text-decoration: underline 5px $color; 
 
     &:hover{
             transition: all .3s;
-            color: $contrast--hover;
-            text-decoration: underline 5px $contrast--hover; 
+            color: $color--hover;
+            text-decoration: underline 5px $color--hover; 
         cursor: pointer;
+
+        .dwm__letter, .contrast{
+            transition: all .3s;
+            fill: $color--hover;
+        }
     }   
 
     svg{
@@ -32,7 +37,22 @@
 }
 
 .contrast{
-    fill: $contrast;
+    fill: $color;
+}
+
+.dwm__letter{
+    fill: white;
+}
+
+.reseau__svg{
+    width: 32px;
+    height: 32px;
+    fill: $color;
+
+    &:hover{
+        transition: all .3s;
+        fill: $color--hover;
+    }
 }
 
 @media (min-width: 768px) {
