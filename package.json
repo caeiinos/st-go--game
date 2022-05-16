@@ -25,7 +25,7 @@
     "vue-template-compiler": "^2.6.11"
   },
   "dependencies": {
-    "@splidejs/splide": "^3.6.12",
+    "kaboom": "^2000.2.9",
     "modern-normalize": "^1.0.0"
   }
 }
