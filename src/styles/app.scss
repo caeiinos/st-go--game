@@ -1,9 +1,95 @@
-@import 'utils/variables';
-@import 'components/footer';
-@import 'components/header';
-@import 'components/content';
-@import 'components/slider';
-@import 'components/proto';
-@import 'background';
 @import '../../node_modules/modern-normalize/modern-normalize.css';
 
+body{
+    margin: 0;
+    overflow: hidden;
+    font-family: nort, sans-serif;
+}
+.game__title{
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+    font-size: 7vw;
+    top: 50px;
+    margin: 0%;
+    font-weight: 700;
+    font-style: italic;
+}   
+
+.content{
+    display: none;
+}
+
+.fiche__trigger{
+    position: absolute;
+    right: 5%;
+    top: 5%;
+    background: none;
+    border: 0px;
+    color: white;
+    font-size: 45px;
+    cursor: pointer;
+}
+
+.is--visible{
+    display: inline;
+}
+
+.fiche{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background-color: rgba(0, 0, 0, 0.475);
+    color: white;
+    width: 80%;
+    max-width: 1440px;
+    height: 1000px;
+}
+
+.fiche__main{
+    text-align: center;
+    max-height: 800px;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.fiche__img{
+    width: 100%;
+}
+
+.fiche__title{
+    font-size: 48px;
+}
+
+.fiche__sec{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    max-height: 500px;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: 100px;
+}
+
+.fiche__cara, .fiche__name{
+    font-size: 35px;
+}
+
+.fiche__text{
+    font-size: 25px;
+}
+
+.title__go{
+    background-image: url('../assets/images/logo.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    color: white;
+    font-size: 8vw;
+}
+
+.invisible{
+    display: none;
+}
