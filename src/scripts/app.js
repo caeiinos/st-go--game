@@ -510,7 +510,7 @@ scene("game", (mapIdx) => {
 
     add([
         sprite("score"),
-        pos(vec2(15, height() - (40))),
+        pos(vec2(14, height() - (40))),
         fixed(),
         stay(),
         "score"
