@@ -9,7 +9,7 @@ body{
     position: absolute;
     left: 50%;
     transform: translate(-50%);
-    font-size: 7vw;
+    font-size: 100px;
     top: 50px;
     margin: 0%;
     font-weight: 700;
@@ -46,7 +46,6 @@ body{
     color: white;
     width: 80%;
     max-width: 1440px;
-    height: 1000px;
 }
 
 .fiche__main{
@@ -68,18 +67,19 @@ body{
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    max-height: 500px;
     margin-top: auto;
     margin-bottom: auto;
     margin-left: 100px;
 }
 
 .fiche__cara, .fiche__name{
-    font-size: 35px;
+    font-size: 30px;
+    margin: 0%;
 }
 
 .fiche__text{
-    font-size: 25px;
+    font-size: 20px;
+    margin-top: 0.5rem;
 }
 
 .title__go{
@@ -87,7 +87,7 @@ body{
     background-size: contain;
     background-repeat: no-repeat;
     color: white;
-    font-size: 8vw;
+    font-size: 115px;
 }
 
 .invisible{

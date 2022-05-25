@@ -1,10 +1,16 @@
 "use strict";
-
+ let screenscale = 0;
 import kaboom from "kaboom";
+if(window.innerWidth < 1400){
+    screenscale = 3
+}
+else{
+    screenscale = 3.5
+};
 
 kaboom({
   global:true,
-  scale:4,
+  scale:screenscale,
   fullscreen:true,
 
 });
@@ -68,6 +74,7 @@ loadSprite("site--r", "site--r.png")
 loadSprite("site--tr", "site--tr.png")
 loadSprite("site--l", "site--l.png") 
 loadSprite("herb", "herb.png")
+loadSprite("feu", "feu.png")
 loadSprite("stone", "stone.png")
 loadSprite("arbre--1", "arbre--1.png")
 loadSprite("arbre--3", "arbre--3.png")
@@ -164,54 +171,77 @@ scene("game", (mapIdx) => {
 
 ],
 [    
-    "ibbbbbbbbbbbbbbbbbbbbbbz",
-    "r                      l",
-    "r                      l",
-    "r                      l",
-    "r                      l",
-    "r                      l",
-    "r                      l",
-    "r                      l",
-    "yc                     l",
-    "xr                     l",
-    "xr                  ù  l",
-    "xytttttttttttttttttttttu",
+    "ibbbbbbbbbbbbbbbbbbbbbbbbbbbbbbz",
+    "r    s                         ebbbbbbbbz",
+    "r                      o                lxxxxxxxxxx",
+    "r                                       lxxxxxxxxxx",
+    "r                            1          lxxxxxxxxxx",
+    "r                                       lxxxxxxxxxx",
+    "r                3                      lxxxxxxxxxx",
+    "r     1                                 lxxxxxxxxxx",
+    "r                                m      lxxxxxxxxxx",
+    "r                                       lxxxxxxxxxx",
+    "r     n                   2             lxxxxxxxxxx",
+    "yc          o                           lxxxxxxxxxx",
+    "xr                                      lxxxxxxxxxx",
+    "xr                                      ebbbbbbbbbz",
+    "xytttttttttttttttttttc                            l",
+    "x=$$$$$$$$$$$$$$$$$$$r  1                         l",
+    "xxxxxxxxxxxxxxxxxxxxxr         2             1    l",
+    "xxxxxxxxxxxxxxxxxxxxxr               s            l",
+    "xxxxxxxxxxxxxxxxxxxxxr                            l",
+    "xxxxxxxxxxxxxxxxxxxxxr    s                       l",
+    "xxxxxxxxxxxxxxxxxxxxxr             2              l",
+    "xxxxxxxxxxxxxxxxxxxxxr                            l",
+    "xxxxxxxxxxxxxxxxxxxxxr                            l",
+    "xxxxxxxxxxxxxxxxxxxxxr      o                 ù   l",
+    "xxxxxxxxxxxxxxxxxxxxxr                            l",
+    "xxxxxxxxxxxxxxxxxxxxxyttttttttttttttttttttttttttttu",
+    "xxxxxxxxxxxxxxxxxxxxx=$$$$$$$$$$$$$$$$$$$$$$$$$$$$µ",
 ],
 [    
     "ibbbbbbbbbbbbbbbbbbbbbbz",
     "r                      l",
+    "r    1            m    l",
     "r                      l",
+    "yttttttc               l",
+    "$$$$$$$r           o   l",
+    "xxxxxxxr       2       l",
+    "xxxxxxxr               l",
+    "xxxxxxxr   s           l",
+    "xxxxxxxr               l",
+    "xxxxxxxr           n   l",
+    "xxxxxxxr               l",
+    "xxxxxxxr  3            l",
+    "ibbbbbbd               l",
     "r                      l",
-    "r                 ù    l",
+    "r   ù         o     2  l",
     "r                      l",
-    "r                      l",
-    "r                      l",
-    "yc                     l",
-    "xr                     l",
-    "xr                     l",
-    "xytttttttttttttttttttttu",
+    "yttttttttttttttttttttttu",
+    "=$$$$$$$$$$$$$$$$$$$$$$µ",
+
 ],
 [    
-    "ibbbbbbbbbbbbbbbbbbbbbbz",
-    "r                      l",
-    "r                      l",
-    "r                      l",
-    "r          ù           l",
-    "r                      l",
-    "r                      l",
-    "r                      l",
-    "yc                     l",
-    "xr                     l",
-    "xr                     l",
-    "xytttttttttttttttttttttu",
+    "ibbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbz",
+    "r                                                          l",
+    "r       1           n        1            m         s      l",
+    "r                                                          l",
+    "r                                                          l",
+    "r               m                    o    3                l",
+    "r                       3                          s       l",
+    "r       f                                                  l",
+    "yc                                   s                 ù   l",
+    "xr   s             2  o                   1                l",
+    "xr                                                         l",
+    "xytttttttttttttttttttttttttttttttttttttttttttttttttttttttttu",
 ],
 [    
     "ibbbbbbbbbbbbbbbbbbz",
+    "r  s               l",
+    "r             3    l",
+    "r                f l",
     "r                  l",
-    "r                  l",
-    "r                  l",
-    "r                  l",
-    "r                  l",
+    "r   1        o     l",
     "r                  l",
     "yttttttttttttttttttu", 
   ],
@@ -343,6 +373,12 @@ scene("game", (mapIdx) => {
             origin('center'),
             layer('deco'),
         ],  
+        'f': () => [
+            sprite('feu'),
+            area(), 
+            solid(),
+            layer('deco'),
+        ],  
         'ù': () => [
             sprite('fossil'),
             area(),
@@ -367,6 +403,7 @@ scene("game", (mapIdx) => {
     area({ cursor: "pointer", }),
     scale(1),
     stay(),
+    layer('ui'),
     origin("left"),
     "restart"
     ])
@@ -402,6 +439,7 @@ scene("game", (mapIdx) => {
         pos(vec2(width()-20, 10)),
         fixed(),
         area({ cursor: "pointer", }),
+        layer('ui'),
         origin("right"),
         ])
 
@@ -414,6 +452,7 @@ scene("game", (mapIdx) => {
     
         pos(vec2(width()-20, 20)),
         fixed(),
+        layer('ui'),
         area({ cursor: "pointer", }),
         origin("right"),
         ])
@@ -458,15 +497,25 @@ scene("game", (mapIdx) => {
         // You can also register an event that courss when certain anim ends
     })
 
-    for (let fossNum = -1; fossNum <= mapIdx; fossNum++) {
-        add([
-            sprite("score"),
-            pos(vec2(20, height() - (20 * fossNum))),
-            fixed(),
-            stay(),
-            "score"
-        ])   
-    }
+    add([
+        text(mapIdx + '/4',{
+            size:12,
+        }),
+        pos(vec2(20, height() - (20))),
+        fixed(),
+        stay(),
+        origin('center'),
+        "score"
+    ])
+
+    add([
+        sprite("score"),
+        pos(vec2(15, height() - (40))),
+        fixed(),
+        stay(),
+        "score"
+    ])
+
     
     var gonext = false
     
@@ -564,34 +613,34 @@ scene("excave", (excaveIdx) => {
     const fouille  = [
   [    
     "atttttttttttttc",
-    "l  3    123   r",
-    "l       2 11  r",
-    "l3   22       r",
-    "l    321  1   r",
-    "l   1     3   r",
-    "l    2  2     r",
-    "l   121   32  r",
+    "l  3 31 123   r",
+    "l  121  2 11  r",
+    "l3   22 3322  r",
+    "l 23  321  1  r",
+    "l   1  33 3 2 r",
+    "l 1  2  2 33  r",
+    "l 22 121  32  r",
     "dbbbbbbbbbbbbbe", 
   ],
   [    
     "atttttttttttttc",
     "l  33 11 2    r",
-    "l     31      r",
-    "l33 1 2       r",
+    "l     31  33  r",
+    "l33 1 2   11  r",
     "l  232 1  2   r",
-    "l       3 2 1 r",
-    "l   11  2     r",
-    "l    12 33 2  r",
+    "l  121  3 2 1 r",
+    "l   11  2  1  r",
+    "l 22 12 33 2  r",
     "dbbbbbbbbbbbbbe", 
   ],
   [    
     "atttttttttttttc",
     "l  1232   2   r",
-    "l       323   r",
-    "l3 2 2        r",
+    "l    11 323   r",
+    "l3 2 2  321 1 r",
     "l    23 31    r",
     "l   33 21  1  r",
-    "l    123 2    r",
+    "l21  123 2  1 r",
     "l   1233   1  r",
     "dbbbbbbbbbbbbbe", 
   ],
@@ -599,11 +648,11 @@ scene("excave", (excaveIdx) => {
     "atttttttttttttc",
     "l  3 22 1 3   r",
     "l   3223   1  r",
-    "l22 3   21    r",
+    "l22 3   21  22r",
     "l   323 1 1   r",
-    "l   3 21 1    r",
-    "l    33 21    r",
-    "l   321 11    r",
+    "l   3 21 1  1 r",
+    "l 2  33 21 3  r",
+    "l   321 11  31r",
     "dbbbbbbbbbbbbbe", 
   ],
   
@@ -612,7 +661,7 @@ scene("excave", (excaveIdx) => {
       addLevel(fouille[excaveIdx], {
           width: 16,
           height: 16,
-          pos: vec2(center().x -120, center().y -120),
+          pos: vec2(center().x -120, center().y -72),
 
         't': () => [
           sprite('site--t'),
@@ -691,7 +740,7 @@ scene("excave", (excaveIdx) => {
 
             add([
                 sprite('dirt'),
-                pos(vec2(center().x -120, center().y -120)),
+                pos(vec2(center().x -120, center().y -72)),
                 layer('foss'),
             ]) 
 
@@ -710,7 +759,7 @@ scene("excave", (excaveIdx) => {
         var i = 0
         var y = 0
 
-        function shoot() {
+        function shoot() { 
     
             add([
                 pos(mousePos()),
@@ -743,24 +792,26 @@ scene("excave", (excaveIdx) => {
     
         onClick("cailloux", () => {
             if(y>10){
-                destroyAll("cailloux")
+                destroyAll("cailloux"),
+                destroyAll("score"),
+                
                 score()       
             }
             else{
-                rest.text = "cailloux a detruire : " + (10 - y)
+                rest.text = "cailloux a detruire : " + (11 - y)
             }
         })
 
                 
         const rest = add([
-            text("cailloux a detruire : " + (10 - y),{
+            text("cailloux a detruire : " + (11 - y),{
                 size: 10,
                 cursor: "pointer",
                 }),
-            pos(vec2(width()-20, 20)),
+            pos(vec2(width()/2, center().y + 92)),
             fixed(),
             area({ cursor: "pointer", }),
-            origin("right"),
+            origin("center"),
 
         ])
 
@@ -786,17 +837,28 @@ scene("excave", (excaveIdx) => {
         function score(){
             for (let fossNum = -1; fossNum <= excaveIdx+1; fossNum++) {
                 add([
-                    sprite("score"),
-                    pos(vec2(20, height() - (20 * fossNum))),
-                    fixed(),
-                ]),
-                add([
                     sprite(back[excaveIdx]),
-                    pos(vec2(center().x -120, center().y -120)),
+                    pos(vec2(center().x -120, center().y -72)),
                     layer('foss'),
                 ])   
             }
 
+            add([
+                text((excaveIdx+1) + '/4',{
+                    size:12,
+                }),
+                pos(vec2(20, height() - (20))),
+                fixed(),
+                origin('center'),
+                "score"
+            ])
+        
+            add([
+                sprite("score"),
+                pos(vec2(14, height() - (40))),
+                fixed(),
+                "score"
+            ])
             
             add([
                 text("[espace pour aller au niveau suivant].wavy",
@@ -810,10 +872,12 @@ scene("excave", (excaveIdx) => {
                     }
                 }),
             
-                pos(vec2(width()/2, height()-20)),
+                pos(vec2(width()/2, center().y + 92)),
                 fixed(),
                 origin("center"),
             ])
+
+            destroy(rest);
         }
 
     })
@@ -863,19 +927,19 @@ scene("start", () => {
         ]);
 	
 
-	addButton("Start", vec2(width() / 2, height() / 2 -50), () => go("intro"))
-	addButton("Landing", vec2(width() / 2, height() / 2), () => land("https://jean-deroy.be/projets/tfa/"))
+	addButton("Start", vec2(width() / 2, height() / 2 -30), () => go("intro"))
+	addButton("Landing", vec2(width() / 2, height() / 2 +10), () => land("https://jean-deroy.be/projets/tfa/"))
 	
 	// reset cursor to default at frame start for easier cursor management
 
-})
+});
 
 scene("intro", () => {
     layers(['bg','obj','ui'], 'obj')
     add([
         text("[espace pour aller au niveau suivant].wavy",
             {
-            size: 10,
+            size: 12,
             cursor: "pointer",
             styles:{
                 "wavy": (ca) => ({
@@ -887,12 +951,12 @@ scene("intro", () => {
         pos(vec2(width()/2, height()-20)),
         fixed(),
         origin("center"),
-    ])
+    ]);
 
     add([
         text("Salut nouvel aventurier es-tu pret a decouvrir l univers de [SteGO].wavy! Un univers rempli de dinosaures! Pour partir a sa decouverte, tu seras accompagne de Alain Grand, le celebre  paleontologue",
             {
-                width:220,
+                width:190,
             size: 12,
             styles:{
                 "wavy": (ca) => ({
@@ -904,11 +968,11 @@ scene("intro", () => {
         pos(vec2(width()/2, height()/2-20)),
         fixed(),
         origin("center"),
-    ])
+    ]);
 
     onKeyPress(("space"), () =>{
         go("game", 0 ) 
-    })
+    });
 
     add([
         sprite("perso"),
@@ -918,7 +982,7 @@ scene("intro", () => {
         area(),
         solid(),
 
-    ])
+    ]);
 
     add([
         sprite("fossil"),
@@ -927,7 +991,7 @@ scene("intro", () => {
         scale(2),
         area(),
         solid(),
-    ])
+    ]);
 
 
     var title = document.querySelector(".game__title");
@@ -941,8 +1005,6 @@ scene("intro", () => {
         scale(1),
         layer('bg')
         ]);
+    });
 
-
-})
-
-go("start")
+go("start");
