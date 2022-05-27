@@ -2,10 +2,13 @@
  let screenscale = 0;
 import kaboom from "kaboom";
 if(window.innerWidth < 1400){
-    screenscale = 3
+    screenscale = 3;
+}
+else if(window.innerWidth < 1921){
+    screenscale = 4;
 }
 else{
-    screenscale = 3.5
+    screenscale = 5;
 };
 
 kaboom({
