@@ -4,8 +4,8 @@ import kaboom from "kaboom";
 if(window.innerWidth < 1400){
     screenscale = 3;
 }
-else if(window.innerWidth < 1921){
-    screenscale = 4;
+else if(window.innerWidth < 1930){
+    screenscale = 3.5;
 }
 else{
     screenscale = 5;
@@ -21,26 +21,20 @@ kaboom({
 
 add([
   sprite("background"),
-  // Make the background centered on the screen
   pos(width() / 2, height() / 2),
   origin("center"),
-  // Allow the background to be scaled
   scale(1),
-  // Keep the background position fixed even when the camera moves
   fixed()
 ]);
-// Scale the background to cover the screen
 
   
 function land(url) {
     window.open(url, '_blank').focus();
 };
 
-let SPEED = 120
-let largeur = window.innerWidth;
-let hauteur = window.innerHeight;
+let SPEED = 120 
 
-loadRoot("/assets/images/")
+loadRoot("assets/images/")
 loadSprite("background", "background.jpg")
 loadSprite("backgreen", "backgreen.jpg")
 loadSprite("dirt", "dirt.png")
@@ -102,31 +96,36 @@ loadSprite("score", "score.png")
 loadSprite("cailloux--1", "cailloux--1.png")
 loadSprite("cailloux--2", "cailloux--2.png")
 loadSprite("cailloux--3", "cailloux--3.png")
-loadSprite("iguanodon", "iguanodon.png")
+loadSprite("iguanodon", "iguanodon.png",{
+    sliceX: 4,
+
+    anims: {
+		"repos": {
+			from: 0,
+			to: 3,
+			speed: 5,
+			loop: true,
+		},
+    }
+})
 loadSprite("fossil", "fossil.png",{
     sliceX: 4,
 
     anims: {
 		"repos": {
-			// Starts from frame 0, ends at frame 3
 			from: 0,
 			to: 3,
-			// Frame per second
 			speed: 5,
 			loop: true,
 		},
     }
 })
 loadSprite("perso", "alain.png", {
-	// The image contains 9 frames layed out horizontally, slice it into individual frames
 	sliceX: 8,
-	// Define animations
 	anims: {
 		"repos": {
-			// Starts from frame 0, ends at frame 3
 			from: 0,
 			to: 3,
-			// Frame per second
 			speed: 5,
 			loop: true,
 		},
@@ -239,14 +238,14 @@ scene("game", (mapIdx) => {
     "xytttttttttttttttttttttttttttttttttttttttttttttttttttttttttu",
 ],
 [    
-    "ibbbbbbbbbbbbbbbbbbz",
-    "r  s               l",
-    "r             3    l",
-    "r                f l",
-    "r                  l",
-    "r   1        o     l",
-    "r                  l",
-    "yttttttttttttttttttu", 
+    "ibbbbbbbbbbbbbbbbbbbbbbbbz",
+    "r  s                     l",
+    "r                  3     l",
+    "r                        l",
+    "r             W      f   l",
+    "r   1              o     l",
+    "r                        l",
+    "yttttttttttttttttttttttttu", 
   ],
 
   ]
@@ -382,6 +381,14 @@ scene("game", (mapIdx) => {
             solid(),
             layer('deco'),
         ],  
+        'W': () => [
+            sprite('iguanodon'),
+            area(), 
+            solid(),
+            origin('center'),
+            layer('deco'),
+            "iguanodon"
+        ],  
         'ù': () => [
             sprite('fossil'),
             area(),
@@ -413,6 +420,11 @@ scene("game", (mapIdx) => {
 
     every("fossil", (f) => {
         f.play('repos')
+    })
+
+    every("iguanodon", (i) => {
+        i.play('repos'),
+        i.flipX(true)
     })
 
 
@@ -461,7 +473,7 @@ scene("game", (mapIdx) => {
         ])
 
     restart.onClick(()=>{
-        go("game",0)
+        go("game",4)
         destroyAll("score")
         destroyAll("affiche")
     })
@@ -485,19 +497,15 @@ scene("game", (mapIdx) => {
 
 
     player.onUpdate(() => {
-        // Set the viewport center to player.pos
         camPos(player.pos)
     })
 
 
-    // .play is provided by sprite() component, it starts playing the specified animation (the animation information of "repos" is defined above in loadSprite)
     player.play("repos")
 
 
-    // Switch to "repos" or "cours" animation when player hits ground
 
     player.onAnimEnd("repos", () => {
-        // You can also register an event that courss when certain anim ends
     })
 
     add([
@@ -536,14 +544,26 @@ scene("game", (mapIdx) => {
         }
     })
 
+    let sucess = false
+
+    player.onCollide("iguanodon", () => {
+        sucess = true             
+	})
+
+    onKeyPress("space", () => {
+        if(sucess){
+            fiche.classList.toggle("is--visible")
+        }
+    })
+
     onKeyPress(["left", "right", "up", "down"], () => {
         gonext = false
+        sucess = false
     }) 
 
     onKeyDown("left", () => {
         player.move(-SPEED, 0)
         player.flipX(true)
-        // .play() will reset to the first frame of the anim, so we want to make sure it only courss when the current animation is not "cours"
         if ( player.curAnim() !== "cours") {
             player.play("cours")
         }
@@ -572,7 +592,6 @@ scene("game", (mapIdx) => {
     })
 
     onKeyRelease(["left", "right", "up", "down"], () => {
-        // Only reset to "repos" if player is not holding any of these keys
         if ( !isKeyDown("left") && !isKeyDown("right") && !isKeyDown("up") && !isKeyDown("down")) {
             player.play("repos")
         }   
@@ -589,18 +608,19 @@ scene("game", (mapIdx) => {
 
     if(mapIdx == 4){
         destroyAll("score")
-        add([
-            sprite("iguanodon"),
-            pos(vec2(20, height() - 30)),
-            fixed(),
-            stay(),
-            area(),
-            "affiche"
-        ])   
 
-        onClick("affiche", () => {
-            fiche.classList.add("is--visible");
-        })
+        add([
+            text("Bravo tu as trouve les 4 fossiles! tu peux maintenant aller a la decouverte de ton nouvel ami.",{
+                size: 14,
+                width:210,
+                }),
+            pos(vec2(width()/2, center().y + 60)),
+            fixed(),
+            area(),
+            origin("center"),
+
+        ])
+         
     }
     else{
         fiche.classList.remove("is--visible");
@@ -933,8 +953,6 @@ scene("start", () => {
 	addButton("Start", vec2(width() / 2, height() / 2 -30), () => go("intro"))
 	addButton("Landing", vec2(width() / 2, height() / 2 +10), () => land("https://jean-deroy.be/projets/tfa/"))
 	
-	// reset cursor to default at frame start for easier cursor management
-
 });
 
 scene("intro", () => {
@@ -957,7 +975,7 @@ scene("intro", () => {
     ]);
 
     add([
-        text("Salut nouvel aventurier es-tu pret a decouvrir l univers de [SteGO].wavy! Un univers rempli de dinosaures! Pour partir a sa decouverte, tu seras accompagne de Alain Grand, le celebre  paleontologue",
+        text("Pret a partir a l aventure et a la decouverte de la prehistoire? Pour decouvrir le dinosaure cacher il te suiffira de trouver les 4 fossiles",
             {
                 width:190,
             size: 12,
