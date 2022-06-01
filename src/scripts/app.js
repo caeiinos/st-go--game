@@ -72,6 +72,7 @@ loadSprite("site--tr", "site--tr.png")
 loadSprite("site--l", "site--l.png") 
 loadSprite("herb", "herb.png")
 loadSprite("feu", "feu.png")
+loadSprite("fleche", "fleche.png")
 loadSprite("stone", "stone.png")
 loadSprite("arbre--1", "arbre--1.png")
 loadSprite("arbre--3", "arbre--3.png")
@@ -93,6 +94,7 @@ loadSprite("corner--breau", "corner--breau.png")
 loadSprite("green", "green.png")
 loadSprite("grey", "grey.png")
 loadSprite("score", "score.png")
+loadSprite("button", "button.png")
 loadSprite("cailloux--1", "cailloux--1.png")
 loadSprite("cailloux--2", "cailloux--2.png")
 loadSprite("cailloux--3", "cailloux--3.png")
@@ -473,7 +475,7 @@ scene("game", (mapIdx) => {
         ])
 
     restart.onClick(()=>{
-        go("game",4)
+        go("game",0)
         destroyAll("score")
         destroyAll("affiche")
     })
@@ -611,10 +613,10 @@ scene("game", (mapIdx) => {
 
         add([
             text("Bravo tu as trouve les 4 fossiles! tu peux maintenant aller a la decouverte de ton nouvel ami.",{
-                size: 14,
-                width:210,
+                size: 12,
+                width:230,
                 }),
-            pos(vec2(width()/2, center().y + 60)),
+            pos(vec2(width()/2, center().y +70)),
             fixed(),
             area(),
             origin("center"),
@@ -848,12 +850,6 @@ scene("excave", (excaveIdx) => {
             layer('bg'),
             ]);
 
-        onKeyPress(("space"), () =>{
-            if(y>10){
-              go("game", excaveIdx +1 ) 
-        
-            }
-        })
 
         var back = ['crane','cote','os','os--2']
 
@@ -884,9 +880,9 @@ scene("excave", (excaveIdx) => {
             ])
             
             add([
-                text("[espace pour aller au niveau suivant].wavy",
+                text("[niveau suivant].wavy",
                     {
-                    size: 10,
+                    size: 11,
                     cursor: "pointer",
                     styles:{
                         "wavy": (ca) => ({
@@ -897,11 +893,35 @@ scene("excave", (excaveIdx) => {
             
                 pos(vec2(width()/2, center().y + 92)),
                 fixed(),
+                layer("ui"),
+                origin("center"),
+            ])
+
+            const bouton = add([
+                sprite("button"),
+                pos(vec2(width()/2, center().y + 92)),
+                scale(2),
+                fixed(),
+                area(),
+                origin("center"),
+                "bouton"
+            ])
+           
+            add([
+                sprite("fleche"),
+                pos(vec2(width()/2 + 60, center().y + 92)),
+                scale(2),
+                fixed(),
                 origin("center"),
             ])
 
             destroy(rest);
+
+            onClick("bouton", () =>{
+                go("game", excaveIdx +1 ) 
+            })
         }
+
 
     })
 
@@ -957,22 +977,45 @@ scene("start", () => {
 
 scene("intro", () => {
     layers(['bg','obj','ui'], 'obj')
-    add([
-        text("[espace pour aller au niveau suivant].wavy",
-            {
-            size: 12,
-            cursor: "pointer",
-            styles:{
-                "wavy": (ca) => ({
-                    pos: vec2(0, wave(-1, 1, time() * 6 + ca * 0.5)),
-                    }),
-            }
-        }),
-    
-        pos(vec2(width()/2, height()-20)),
-        fixed(),
-        origin("center"),
-    ]);
+            add([
+                text("[niveau suivant].wavy",
+                    {
+                    size: 11,
+                    cursor: "pointer",
+                    styles:{
+                        "wavy": (ca) => ({
+                            pos: vec2(0, wave(-1, 1, time() * 6 + ca * 0.5)),
+                            }),
+                    }
+                }),
+            
+                pos(vec2(width()/2, center().y + 92)),
+                fixed(),
+                layer("ui"),
+                origin("center"),
+            ])
+
+            add([
+                sprite("button"),
+                pos(vec2(width()/2, center().y + 92)),
+                scale(2),
+                fixed(),
+                area(),
+                origin("center"),
+                "bouton"
+            ])
+           
+            add([
+                sprite("fleche"),
+                pos(vec2(width()/2 + 60, center().y + 92)),
+                scale(2),
+                fixed(),
+                origin("center"),
+            ])
+
+            onClick("bouton", () =>{
+                go("game", 0 ) 
+            })
 
     add([
         text("Pret a partir a l aventure et a la decouverte de la prehistoire? Pour decouvrir le dinosaure cacher il te suiffira de trouver les 4 fossiles",
@@ -988,12 +1031,9 @@ scene("intro", () => {
     
         pos(vec2(width()/2, height()/2-20)),
         fixed(),
+        layer("ui"),
         origin("center"),
     ]);
-
-    onKeyPress(("space"), () =>{
-        go("game", 0 ) 
-    });
 
     add([
         sprite("perso"),
