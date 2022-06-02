@@ -2,13 +2,13 @@
  let screenscale = 0;
 import kaboom from "kaboom";
 if(window.innerWidth < 1400){
-    screenscale = 3;
+    screenscale = 2.5;
 }
 else if(window.innerWidth < 1930){
-    screenscale = 3.5;
+    screenscale = 3;
 }
 else{
-    screenscale = 5;
+    screenscale = 4.5;
 };
 
 kaboom({
@@ -940,6 +940,7 @@ scene("start", () => {
 			area({ cursor: "pointer", }),
 			scale(1),
 			origin("center"),
+            "bout",
 		])
 	
 		btn.onClick(f)
@@ -970,8 +971,8 @@ scene("start", () => {
         ]);
 	
 
-	addButton("Start", vec2(width() / 2, height() / 2 -30), () => go("intro"))
-	addButton("Landing", vec2(width() / 2, height() / 2 +10), () => land("https://jean-deroy.be/projets/tfa/"))
+	addButton("Commencer", vec2(width() / 2, height() / 2 -30), () => go("intro"))
+	addButton("Site Web", vec2(width() / 2, height() / 2 +10), () => land("https://jean-deroy.be/projets/tfa/"))
 	
 });
 
